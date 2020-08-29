@@ -13,7 +13,10 @@ before_script:
   - git clone https://github.com/flutter/flutter.git -b beta
   - ./flutter/bin/flutter doctor
 script:
+  - echo "RUNNING TESTS"
   - ./flutter/bin/flutter test
+  - echo "BUILDING.."
+  - cd example && flutter build apk --split-per-abi 
 cache:
   directories:
     - $HOME/.pub-cache
