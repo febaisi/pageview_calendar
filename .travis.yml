@@ -16,7 +16,7 @@ script:
   - echo "RUNNING TESTS"
   - ./flutter/bin/flutter test
   - echo "BUILDING.."
-  - cd example && flutter build apk --split-per-abi 
+  - cd example && ../flutter/bin/flutter build apk --split-per-abi 
 cache:
   directories:
     - $HOME/.pub-cache
