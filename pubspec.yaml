@@ -1,19 +1,18 @@
 name: pageview_calendar
 description: Optimized PageView Calendar
-version: 0.0.1
-author: Felipe Baisi <febaisi@gmail.com>
+version: 0.0.2
 homepage: https://github.com/febaisi/pageview_calendar
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  intl: 0.16.0
+  intl: ^0.16.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  intl: 0.16.0
+  intl: ^0.16.0
   flutter_test:
     sdk: flutter
 

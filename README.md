@@ -1,6 +1,6 @@
 # pageviewcalendar
 
-A simple pageview calendar 
+Optimized PageView Calendar
 
 ## Getting Started
 
