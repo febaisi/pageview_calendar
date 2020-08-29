@@ -1,6 +1,8 @@
-# pageviewcalendar
+# Pageview Calendar
 
-Optimized PageView Calendar
+[![Pub Package](https://img.shields.io/pub/v/pageview_calendar.svg?style=flat-square)](https://pub.dev/packages/pageview_calendar)
+
+Optimized Fluter PageView Calendar
 
 ## Getting Started
 
