@@ -1,6 +1,8 @@
 # Pageview Calendar
 
 [![Pub Package](https://img.shields.io/pub/v/pageview_calendar.svg?style=flat-square)](https://pub.dev/packages/pageview_calendar)
+[![Build](https://travis-ci.org/febaisi/pageview_calendar.svg?branch=master)](https://travis-ci.org/github/febaisi/pageview_calendar)
+
 ------------------------------
 
 Optimized Fluter PageView Calendar
