@@ -11,18 +11,18 @@ cache:
 
 jobs:
   include:
-    - stage: tests
-      addons:
-        apt:
-          # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
-          sources:
-            - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
-          packages:
-            - fonts-droid-fallback
-            - libstdc++6
-      script:
-        - echo "RUNNING TESTS"
-        - ./flutter/bin/flutter test
+    #    - stage: tests
+    #      addons:
+    #        apt:
+    #          # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
+    #          sources:
+    #            - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
+    #          packages:
+    #            - fonts-droid-fallback
+    #            - libstdc++6
+    #      script:
+    #        - echo "RUNNING TESTS"
+    #        - ./flutter/bin/flutter test
     - stage: build
       language: android
       dist: trusty
@@ -38,5 +38,5 @@ jobs:
           - 'android-sdk-license-.+'
           - 'google-gdk-license-.+'            
       script:
-        - yes | /usr/local/android-sdk/tools/bin/sdkmanager --licenses
+        - yes | sdkmanager --licenses
         - cd example && ../flutter/bin/flutter build apk --split-per-abi
