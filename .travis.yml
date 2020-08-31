@@ -1,6 +1,10 @@
 os:
   - linux
-sudo: false
+
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - ./flutter/bin/flutter doctor
+
 addons:
   apt:
     # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
@@ -9,12 +13,17 @@ addons:
     packages:
       - libstdc++6
       - fonts-droid-fallback
-before_script:
-  - git clone https://github.com/flutter/flutter.git -b beta
-  - ./flutter/bin/flutter doctor
-script:
-  - echo "RUNNING TESTS"
-  - ./flutter/bin/flutter test
+
 cache:
   directories:
     - $HOME/.pub-cache
+
+jobs:
+  include:
+    - stage: tests
+      sudo: false
+      script:
+        - echo "RUNNING TESTS"
+        - ./flutter/bin/flutter test
+    - stage: build
+      script: pwd
