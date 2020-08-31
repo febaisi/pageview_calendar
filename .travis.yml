@@ -21,10 +21,10 @@ cache:
 
 jobs:
   include:
-    #    - stage: tests
-    #      script:
-    #        - echo "RUNNING TESTS"
-    #        - ./flutter/bin/flutter test
+    - stage: tests
+      script:
+        - echo "RUNNING TESTS"
+        - ./flutter/bin/flutter test
     - stage: build
       language: android
       dist: trusty
