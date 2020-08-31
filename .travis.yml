@@ -37,6 +37,7 @@ jobs:
           - 'android-sdk-preview-license-52d11cd2'
           - 'android-sdk-license-.+'
           - 'google-gdk-license-.+'            
+      before_install:
+        - yes | sdkmanager "platforms;android-28"
       script:
-        - yes | sdkmanager --licenses
         - cd example && ../flutter/bin/flutter build apk --split-per-abi
