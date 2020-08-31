@@ -26,4 +26,13 @@ jobs:
         - echo "RUNNING TESTS"
         - ./flutter/bin/flutter test
     - stage: build
+      language: android
+      dist: trusty
+      android:
+        components:
+          - tools
+          - platform-tools
+          - extra-google-google_play_services
+          - extra-google-m2repository
+          - extra-android-m2repository
       script: pwd
