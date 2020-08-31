@@ -37,4 +37,5 @@ jobs:
           - 'android-sdk-preview-license-52d11cd2'
           - 'android-sdk-license-.+'
           - 'google-gdk-license-.+'            
-      script: pwd
+      script:
+        - cd example && flutter build apk --split-per-abi
