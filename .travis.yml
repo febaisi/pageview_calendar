@@ -21,7 +21,6 @@ cache:
 jobs:
   include:
     - stage: tests
-      sudo: false
       script:
         - echo "RUNNING TESTS"
         - ./flutter/bin/flutter test
@@ -32,7 +31,4 @@ jobs:
         components:
           - tools
           - platform-tools
-          - extra-google-google_play_services
-          - extra-google-m2repository
-          - extra-android-m2repository
       script: pwd
