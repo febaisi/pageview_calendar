@@ -7,7 +7,6 @@ class CalendarUtil {
       return null;
     }
     List<DateTime> calendarDaysList = new List<DateTime>();
-
     //Add days from previous months if needed
     int baseDayCount =
         firstDayOfMonth.weekday; // First day displayed is Sunday (7)
