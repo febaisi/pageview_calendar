@@ -38,4 +38,5 @@ jobs:
           - 'android-sdk-license-.+'
           - 'google-gdk-license-.+'            
       script:
+        - yes | ~/Android/Sdk/tools/bin/sdkmanager --licenses
         - cd example && ../flutter/bin/flutter build apk --split-per-abi
