@@ -38,4 +38,4 @@ jobs:
           - 'android-sdk-license-.+'
           - 'google-gdk-license-.+'            
       script:
-        - cd example && flutter build apk --split-per-abi
+        - cd example && ../flutter/bin/flutter build apk --split-per-abi
