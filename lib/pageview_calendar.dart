@@ -56,7 +56,7 @@ class PageViewCalendar extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      margin: EdgeInsets.only(top: isPortrait ? 20 : 5, left: 15, right: 15),
+      margin: EdgeInsets.only(top: isPortrait ? 20 : 5, left: 5, right: 15),
       child: FractionallySizedBox(
         alignment: Alignment.centerLeft,
         widthFactor: isPortrait ? 1.0 : 0.5,
@@ -68,9 +68,16 @@ class PageViewCalendar extends StatelessWidget {
               child: StreamBuilder(
                 stream: _monhtsLabel.stream,
                 builder: (BuildContext context, snapshot) {
-                  return Text(
-                    snapshot.data.toString(),
-                    style: Theme.of(context).textTheme.display1,
+                  return Container(
+                    margin: EdgeInsets.only(left: isPortrait ? 0 : 12),
+                    child: Text(
+                      snapshot.data.toString(),
+                      style: TextStyle(
+                          color: Colors.black38,
+                          fontSize: 26,
+                        fontWeight: FontWeight.bold
+                      )
+                    ),
                   );
                 },
               ),
