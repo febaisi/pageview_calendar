@@ -51,45 +51,55 @@ class PageViewCalendar extends StatelessWidget {
     _pageController = PageController(initialPage: initialPage);
     _monhtsLabel = new StreamController<String>();
     _updateMonthStream(baseDateTime);
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.only(top: 20, left: 15, right: 15),
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: StreamBuilder(
-              stream: _monhtsLabel.stream,
-              builder: (BuildContext context, snapshot) {
-                return Text(
-                  snapshot.data.toString(),
-                  style: Theme.of(context).textTheme.display1,
-                );
-              },
+      child: FractionallySizedBox(
+        alignment: Alignment.centerLeft,
+        widthFactor: isPortrait ? 1.0 : 0.5,
+        heightFactor: 1.0,
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: isPortrait ? Alignment.center : Alignment.centerLeft,
+              child: StreamBuilder(
+                stream: _monhtsLabel.stream,
+                builder: (BuildContext context, snapshot) {
+                  return Text(
+                    snapshot.data.toString(),
+                    style: Theme.of(context).textTheme.display1,
+                  );
+                },
+              ),
             ),
-          ),
-          Container(
-              child: _buildDaysOfWeek(), margin: EdgeInsets.only(top: 15)),
-          Divider(),
-          Container(
-              margin: EdgeInsets.only(top: 5),
-              height: 400,
+            Container(
+                child: _buildDaysOfWeek(), margin: EdgeInsets.only(top: 15)),
+            Divider(),
+            Container(
+                margin: EdgeInsets.only(top: 5),
 //            color: Colors.red,
-              child: PageView.builder(
-                  controller: _pageController,
-                  onPageChanged: (valueChanged) {
-                    _updateMonthStream(_getSelectedDate(
-                        valueChanged, initialPage, baseDateTime));
-                  },
-                  itemBuilder: (BuildContext context, int idx) {
-                    return Container(
-                        child: Calendar(
-                            goNextPage: this._goNextCalendarPage,
-                            goPreviousPage: this._goPreviousCalendarPage,
-                            baseDateDay: _getSelectedDate(
-                                idx, initialPage, baseDateTime)));
-                  }))
-        ],
+                child: SizedBox(
+                  width: double.infinity,
+                 height: 200,
+                  child: PageView.builder(
+                      controller: _pageController,
+                      onPageChanged: (valueChanged) {
+                        _updateMonthStream(_getSelectedDate(
+                            valueChanged, initialPage, baseDateTime));
+                      },
+                      itemBuilder: (BuildContext context, int idx) {
+                        return Container(
+                            child: Calendar(
+                                goNextPage: this._goNextCalendarPage,
+                                goPreviousPage: this._goPreviousCalendarPage,
+                                baseDateDay: _getSelectedDate(
+                                    idx, initialPage, baseDateTime)));
+                      }),
+                ))
+          ],
+        ),
       ),
     );
   }
