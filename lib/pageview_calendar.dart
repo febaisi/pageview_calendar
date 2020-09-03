@@ -55,7 +55,8 @@ class PageViewCalendar extends StatelessWidget {
 
     return Container(
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.only(top: 20, left: 15, right: 15),
+      height: MediaQuery.of(context).size.height,
+      margin: EdgeInsets.only(top: isPortrait ? 20 : 5, left: 15, right: 15),
       child: FractionallySizedBox(
         alignment: Alignment.centerLeft,
         widthFactor: isPortrait ? 1.0 : 0.5,
@@ -77,12 +78,10 @@ class PageViewCalendar extends StatelessWidget {
             Container(
                 child: _buildDaysOfWeek(), margin: EdgeInsets.only(top: 15)),
             Divider(),
-            Container(
-                margin: EdgeInsets.only(top: 5),
+            Expanded(
+              child: Container(
+                  margin: EdgeInsets.only(top: 5),
 //            color: Colors.red,
-                child: SizedBox(
-                  width: double.infinity,
-                 height: 200,
                   child: PageView.builder(
                       controller: _pageController,
                       onPageChanged: (valueChanged) {
@@ -96,8 +95,8 @@ class PageViewCalendar extends StatelessWidget {
                                 goPreviousPage: this._goPreviousCalendarPage,
                                 baseDateDay: _getSelectedDate(
                                     idx, initialPage, baseDateTime)));
-                      }),
-                ))
+                      })),
+            )
           ],
         ),
       ),
