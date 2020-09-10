@@ -7,13 +7,16 @@ class Calendar extends StatefulWidget {
   DateTime baseDateDay;
   Function goNextPage;
   Function goPreviousPage;
+  Function getTempSelectedDay;
 
   Calendar(
       {@required this.baseDateDay,
       @required this.goNextPage,
+      @required this.getTempSelectedDay,
       @required this.goPreviousPage})
       : assert(baseDateDay != null),
         assert(goPreviousPage != null),
+        assert(getTempSelectedDay!= null),
         assert(goNextPage != null);
 
   @override
@@ -28,8 +31,13 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     super.initState();
     var now = new DateTime.now();
-    _selectedDate =
-        (_isSameMonth(now, widget.baseDateDay)) ? now : widget.baseDateDay;
+    DateTime tempSelectedDay = widget.getTempSelectedDay();
+    if (tempSelectedDay != null) {
+      _selectedDate = tempSelectedDay;
+    } else {
+      _selectedDate =
+      (_isSameMonth(now, widget.baseDateDay)) ? now : widget.baseDateDay;
+    }
   }
 
   Widget _buildCalendarDaysWidget(DateTime firstDayOfMonth) {
@@ -75,9 +83,9 @@ class _CalendarState extends State<Calendar> {
           });
         } else {
           if (shouldGoRight(widget.baseDateDay, displayedDate)) {
-            widget.goNextPage();
+            widget.goNextPage(displayedDate);
           } else {
-            widget.goPreviousPage();
+            widget.goPreviousPage(displayedDate);
           }
         }
       },

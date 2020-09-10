@@ -10,6 +10,7 @@ class PageViewCalendar extends StatelessWidget {
   StreamController<String> _monhtsLabel;
   PageController _pageController;
   List<String> daysOfWeek2 = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  DateTime tempSelectedDate = null;
 
   DateTime _getSelectedDate(int idx, int initialPage, DateTime baseDateTime) {
     int realIndex = idx - initialPage;
@@ -22,6 +23,7 @@ class PageViewCalendar extends StatelessWidget {
             (baseDateTime.month - monthsBump), baseDateTime.day)
         : DateTime((baseDateTime.year + yearsBump),
             (baseDateTime.month + monthsBump), baseDateTime.day);
+
   }
 
   void _updateMonthStream(DateTime dateTime) {
@@ -100,6 +102,7 @@ class PageViewCalendar extends StatelessWidget {
                             child: Calendar(
                                 goNextPage: this._goNextCalendarPage,
                                 goPreviousPage: this._goPreviousCalendarPage,
+                                getTempSelectedDay: this._getTempSelectedDay,
                                 baseDateDay: _getSelectedDate(
                                     idx, initialPage, baseDateTime)));
                       })),
@@ -111,15 +114,23 @@ class PageViewCalendar extends StatelessWidget {
   }
 
 
-  void _goNextCalendarPage() {
+  void _goNextCalendarPage(DateTime newTempSelectedDate) {
      if (_pageController != null) {
+       tempSelectedDate = newTempSelectedDate;
        _pageController.nextPage(duration: Duration(milliseconds: 1000), curve: Curves.fastLinearToSlowEaseIn);
      }
   }
 
-  void _goPreviousCalendarPage() {
+  void _goPreviousCalendarPage(DateTime newTempSelectedDate) {
     if (_pageController != null) {
+      tempSelectedDate = newTempSelectedDate;
       _pageController.previousPage(duration: Duration(milliseconds: 1000), curve: Curves.fastLinearToSlowEaseIn);
     }
+  }
+
+  DateTime _getTempSelectedDay() {
+      DateTime selectedDay = tempSelectedDate;
+      tempSelectedDate = null;
+      return selectedDay;
   }
 }
