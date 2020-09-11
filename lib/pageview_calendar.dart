@@ -7,10 +7,10 @@ import 'package:intl/intl.dart';
 import 'calendar.dart';
 
 class PageViewCalendar extends StatelessWidget {
-  StreamController<String> _monhtsLabel;
+  StreamController<String> _monthsLabel;
   PageController _pageController;
   List<String> daysOfWeek2 = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  DateTime tempSelectedDate = null;
+  DateTime tempSelectedDate;
 
   DateTime _getSelectedDate(int idx, int initialPage, DateTime baseDateTime) {
     int realIndex = idx - initialPage;
@@ -27,7 +27,7 @@ class PageViewCalendar extends StatelessWidget {
   }
 
   void _updateMonthStream(DateTime dateTime) {
-    _monhtsLabel.add(new DateFormat('yMMMM').format(dateTime));
+    _monthsLabel.add(new DateFormat('yMMMM').format(dateTime));
   }
 
   Widget _buildDaysOfWeek() {
@@ -51,7 +51,7 @@ class PageViewCalendar extends StatelessWidget {
     DateTime now = new DateTime.now();
     DateTime baseDateTime = new DateTime(now.year, now.month, 1);
     _pageController = PageController(initialPage: initialPage);
-    _monhtsLabel = new StreamController<String>();
+    _monthsLabel = new StreamController<String>();
     _updateMonthStream(baseDateTime);
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
@@ -68,7 +68,7 @@ class PageViewCalendar extends StatelessWidget {
             Container(
               alignment: isPortrait ? Alignment.center : Alignment.centerLeft,
               child: StreamBuilder(
-                stream: _monhtsLabel.stream,
+                stream: _monthsLabel.stream,
                 builder: (BuildContext context, snapshot) {
                   return Container(
                     margin: EdgeInsets.only(left: isPortrait ? 0 : 12),
@@ -117,14 +117,15 @@ class PageViewCalendar extends StatelessWidget {
   void _goNextCalendarPage(DateTime newTempSelectedDate) {
      if (_pageController != null) {
        tempSelectedDate = newTempSelectedDate;
-       _pageController.nextPage(duration: Duration(milliseconds: 1000), curve: Curves.fastLinearToSlowEaseIn);
+       _pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
+
      }
   }
 
   void _goPreviousCalendarPage(DateTime newTempSelectedDate) {
     if (_pageController != null) {
       tempSelectedDate = newTempSelectedDate;
-      _pageController.previousPage(duration: Duration(milliseconds: 1000), curve: Curves.fastLinearToSlowEaseIn);
+      _pageController.previousPage(duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
     }
   }
 
